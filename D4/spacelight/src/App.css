@@ -1,0 +1,27 @@
+.home-page {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+  align-items: center;
+  margin: 0 auto;
+  max-width: 85vw;
+}
+.myCard {
+  border-radius: 67px;
+  background: linear-gradient(145deg, #c59edf, #eabbff);
+  box-shadow: 12px 12px 41px #886d9a, -12px -12px 41px #fff2ff;
+  max-width: 38rem;
+  margin-bottom: 1em;
+}
+.card-detail {
+  border-radius: 67px;
+  background: linear-gradient(145deg, #319466, #eabbff);
+  box-shadow: 12px 12px 41px #319466, -12px -12px 41px #fff2ff;
+}
+.home-detail {
+  display: flex;
+  justify-content: center;
+}
+.Navbar {
+  z-index: 10;
+}
