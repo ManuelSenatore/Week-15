@@ -1,18 +1,22 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 const SingleAlbum = (props) => {
+  const navigate = useNavigate()
   return (
     <div className="singleCard">
-      <Link to={'/album' + props.album.id}>
-      <img src={props.album.cover} alt="album cover" />
-      </Link>
-      <Link to={'/album' + props.album.id}>
-      <p>Album: {props.album.title}</p>
-      </Link>
-      <Link to={'/artist' + props.artist.id}>
-      <p>Artist: {props.artist.name}</p>
-      </Link>
+      <img
+       style={{cursor: 'pointer'}}
+       onClick={() => navigate('/album' + props.album.id) }
+       src={props.album.cover} alt="album cover" />
+      <p
+       style={{cursor: 'pointer'}}
+       onClick={() => navigate('/album' + props.album.id) }
+      >Album: {props.album.title}</p>
+      <p
+       style={{cursor: 'pointer'}}
+       onClick={() => navigate('/artist' + props.artist.id) }
+      >Artist: {props.artist.name}</p>
     </div>
   );
 };

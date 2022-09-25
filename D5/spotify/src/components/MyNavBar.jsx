@@ -79,7 +79,7 @@ const MyNavBar = () => {
                   style={{'marginbottom': '4%'}}
                 >
                   <button
-                    v/* ariant='dark' */
+                    /* variant='dark' */
                     className="btn btn-outline-secondary "
                     type="submit"
                     id="button-addon1"

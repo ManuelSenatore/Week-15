@@ -3,7 +3,7 @@ import { useEffect } from "react";
 import { useState } from "react";
 import { Container, Row } from "react-bootstrap";
 import { useSelector } from "react-redux";
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import StartingLoad from "./StartingLoad";
 
 const IndexPage = () => {
@@ -30,6 +30,7 @@ const IndexPage = () => {
   let hipHopArtists = ["eminem", "snoopdogg", "lilwayne", "drake", "kanyewest"];
 
   const artContenent = useSelector((state) => state.art.artists);
+  const navigate = useNavigate();
 
   const [hipHopRandomArtists, setHipHopRandomArtists] = useState([]);
   const [popRandomArtists, setPopRandomArtists] = useState([]);
@@ -86,20 +87,26 @@ const IndexPage = () => {
           {artContenent.length !== 0 && (
             <Container className="myContainer">
               <h2 className="text-light">Search Results</h2>
-
               <div className="searchResults">
                 {artContenent.map((data, i) => (
                   <div className="albumCard">
                     <div className="singleCard searcCard">
-                      <Link to={"/album" + data.album.id}>
-                        <img src={data.album.cover} alt="album cover" />
-                      </Link>
-                      <Link to={"/album" + data.album.id}>
-                        <p>Album: {data.album.title}</p>
-                      </Link>
-                      <Link to={"/artist" + data.artist.id}>
-                        <p>Artist: {data.artist.name}</p>
-                      </Link>
+                      <img
+                        style={{cursor: 'pointer'}}
+                        onClick={() => navigate("/album" + data.album.id)}
+                        src={data.album.cover}
+                        alt="album cover"
+                      />
+                      <p 
+                        style={{cursor: 'pointer'}}
+                        onClick={() => navigate("/album" + data.album.id)}>
+                        Album: {data.album.title}
+                      </p>
+                      <p
+                        style={{cursor: 'pointer'}} 
+                        onClick={() => navigate("/artist" + data.artist.id)}>
+                        Artist: {data.artist.name}
+                      </p>
                     </div>
                   </div>
                 ))}

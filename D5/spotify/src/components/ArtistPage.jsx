@@ -1,6 +1,6 @@
 import React from "react";
 import { useState, useEffect } from "react";
-import { Button, Container } from "react-bootstrap";
+import { Button, Col, Container, Row } from "react-bootstrap";
 import { useParams } from "react-router-dom";
 
 const ArtistPage = () => {
@@ -22,8 +22,7 @@ const ArtistPage = () => {
   const handleArtist = async () => {
     try {
       let response = await fetch(
-        "https://striveschool-api.herokuapp.com/api/deezer/artist/" +
-          params.artistId,
+        "https://striveschool-api.herokuapp.com/api/deezer/artist/"+params.artistId,
         {
           method: "GET",
           headers,
@@ -43,11 +42,10 @@ const ArtistPage = () => {
               headers,
             }
             );
-            
-            console.log(titleArtist?.name);
         if (tracksResponse.ok) {
           let tracklist = await tracksResponse.json();
-          setThisArtist(tracklist);
+          setThisArtist(tracklist.data);
+          console.log(tracklist.data);
         }
       } else {
         alert("Failed to fetch the artist songs");
@@ -58,10 +56,10 @@ const ArtistPage = () => {
     
   };
   return (
-    <Container className="myNewContainer">
+    <Container className="myNewContainer flex-column">
        {
         titleArtist && (
-      <div className="d-flex flex-column mt-5">
+      <div className="d-flex flex-column mt-5 mb-5">
         <h2 className="text-center text-light">{titleArtist.name}</h2>
         <p className="text-center text-light">
           {titleArtist.nb_fan} Followers
@@ -81,29 +79,36 @@ const ArtistPage = () => {
       </div>
         )
       } 
+      <Row className="albumCard">
+
+      
        {
-        thisArtist.data?.map((data, i) => (
-          data ?? (
-      <div key={i} class="col-sm-auto col-md-auto text-center mb-5">
-              <img class="img-fluid" src={
-                data?.album.cover_medium // creating the album image anchor
-              } alt="1" />
-            <p>
-                Track: {
-                  data?.title.length < 16
-                    ? data?.title 
-                    : data?.title.substring(0, 16) + '...' // setting the track title, if it's longer than 16 chars cuts the rest
-                } <br />
-                Album: {
-                  data?.album.title.length < 16
-                    ? data?.album.title
-                    : data?.album.title.substring(0, 16) + '...' // setting the track title, if it's longer than 16 chars cuts the rest
-                }
-            </p>
-      </div>
-          )
-        ))
+        thisArtist && (
+
+          thisArtist.map((data, i) => (
+            data && (
+        <Col key={i} className="col-sm-auto col-md-auto text-center mb-5 text-light">
+                <img className="img-fluid" src={
+                  data?.album.cover_medium // creating the album image anchor
+                } alt="1" />
+              <p>
+                  Track: {
+                    data?.title.length < 16
+                      ? data?.title 
+                      : data?.title.substring(0, 16) + '...' // setting the track title, if it's longer than 16 chars cuts the rest
+                  } <br />
+                  Album: {
+                    data?.album.title.length < 16
+                      ? data?.album.title
+                      : data?.album.title.substring(0, 16) + '...' // setting the track title, if it's longer than 16 chars cuts the rest
+                  }
+              </p>
+        </Col>
+            )
+          ))
+        )
       } 
+      </Row>
     </Container>
   );
 };
